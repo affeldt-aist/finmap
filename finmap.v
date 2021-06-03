@@ -506,8 +506,7 @@ Section FinSetCanonicals.
 
 Variable (K : choiceType).
 
-Canonical fsetType := Eval hnf in [subType for (@enum_fset K)].
-HB.instance Definition _ := [Equality of {fset K} by <:].
+HB.instance Definition _ := [IsSUB for (@enum_fset K)].
 HB.instance Definition _ := [Choice of {fset K} by <:].
 
 End FinSetCanonicals.
@@ -525,8 +524,7 @@ Proof. by rewrite canonical_uniq // keys_canonical. Qed.
 Record fset_sub_type : predArgType :=
   FSetSub {fsval : K; fsvalP : in_mem fsval (@mem K _ A)}.
 
-Canonical fset_sub_subType := Eval hnf in [subType for fsval].
-HB.instance Definition _ := [Equality of fset_sub_type by <:].
+HB.instance Definition _ := [IsSUB for fsval].
 HB.instance Definition _ := [Choice of fset_sub_type by <:].
 HB.instance Definition _ (T : countType) := [Countable of {fset T} by <:].
 
@@ -3582,7 +3580,7 @@ Record fsfun := Fsfun {
        fmap_of_fsfun k != default (val k)]
 }.
 
-Canonical fsfun_subType := Eval hnf in [subType for fmap_of_fsfun].
+HB.instance Definition _ := [IsSUB for fmap_of_fsfun].
 HB.instance Definition _ := [Equality of fsfun by <:].
 
 Fact fsfun_subproof (f : fsfun) :
